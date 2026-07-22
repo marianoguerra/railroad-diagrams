@@ -12,15 +12,16 @@ body, .lede, .playground-note, .output-placeholder { transition: background-colo
 .mode-tabs { display: flex; gap: .35rem; padding: .3rem; background: var(--pg-tabs); border-radius: 8px; }
 .mode-tab { border: 0; border-radius: 6px; background: transparent; color: var(--pg-muted); font: inherit; font-weight: 750; padding: .6rem .9rem; cursor: pointer; }
 .mode-tab[aria-selected="true"] { background: var(--pg-panel); color: var(--accent); box-shadow: 0 1px 4px #0003; }
-.playground { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 650px; border: 1px solid var(--pg-border); border-radius: 12px; overflow: hidden; background: var(--pg-panel); }
-.editor-pane, .output-pane { min-width: 0; display: flex; flex-direction: column; padding: 0; border: 0; border-radius: 0; }
+.playground { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); height: min(650px, 60vh); max-height: 60vh; min-height: 0; border: 1px solid var(--pg-border); border-radius: 12px; overflow: hidden; background: var(--pg-panel); }
+.editor-pane, .output-pane { min-width: 0; min-height: 0; display: flex; flex-direction: column; padding: 0; border: 0; border-radius: 0; overflow: hidden; }
 .editor-pane { border-right: 1px solid var(--pg-border); background: var(--pg-editor); }
 .pane-header { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: .65rem 1rem; background: var(--pg-header); border-bottom: 1px solid var(--pg-border); font-weight: 750; }
 .pane-header small { font-weight: 500; color: var(--pg-muted); }
 .example-picker { display: flex; align-items: center; gap: .5rem; color: var(--pg-muted); font-size: .82rem; font-weight: 650; }
 .example-picker select { max-width: 230px; border: 1px solid var(--pg-border); border-radius: 6px; background: var(--pg-panel); color: var(--pg-text); font: inherit; padding: .35rem 1.8rem .35rem .5rem; }
-.editor-host { flex: 1; min-height: 580px; }
-.CodeMirror { height: 100%; min-height: 580px; font: 14px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: var(--pg-editor); color: var(--pg-editor-text); }
+.editor-host { flex: 1; min-height: 0; overflow: hidden; }
+.CodeMirror { height: 100%; min-height: 0; font: 14px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: var(--pg-editor); color: var(--pg-editor-text); }
+.CodeMirror-scroll { overflow: scroll !important; }
 .CodeMirror-gutters { background: var(--pg-editor-gutter); border-right: 1px solid var(--pg-border); }
 .CodeMirror-linenumber { color: var(--pg-editor-gutter-text); }
 .CodeMirror-cursor { border-left-color: var(--pg-editor-text); }
@@ -34,7 +35,7 @@ body, .lede, .playground-note, .output-placeholder { transition: background-colo
 [data-theme="dark"] .cm-s-railroad .cm-string { color: #f1cf78; }
 [data-theme="dark"] .cm-s-railroad .cm-number { color: #c9a7ff; }
 [data-theme="dark"] .cm-s-railroad .cm-comment { color: #91a2aa; }
-.output { position: relative; flex: 1; display: grid; place-items: center; min-height: 580px; padding: 2rem; overflow: auto; background-color: var(--pg-panel); background-image: linear-gradient(var(--pg-grid) 1px, transparent 1px), linear-gradient(90deg, var(--pg-grid) 1px, transparent 1px); background-size: 24px 24px; }
+.output { position: relative; flex: 1; min-height: 0; display: grid; place-items: center; padding: 2rem; overflow: auto; background-color: var(--pg-panel); background-image: linear-gradient(var(--pg-grid) 1px, transparent 1px), linear-gradient(90deg, var(--pg-grid) 1px, transparent 1px); background-size: 24px 24px; }
 .output svg { display: block; max-width: 100%; height: auto; }
 .output .rrd-diagram { --rrd-stroke: var(--pg-text); --rrd-text: var(--pg-text); --rrd-fill: var(--pg-panel); --rrd-terminal: var(--pg-header); }
 .playground-error { align-self: stretch; margin: 0; color: #9c2915; background: #fff0ec; border: 1px solid #efb5a8; border-radius: 7px; padding: 1rem; white-space: pre-wrap; font: 13px/1.5 ui-monospace, SFMono-Regular, monospace; }
@@ -46,7 +47,7 @@ body, .lede, .playground-note, .output-placeholder { transition: background-colo
   .mode-tabs { align-self: flex-start; }
   .pane-header { align-items: flex-start; flex-direction: column; }
   .example-picker, .example-picker select { width: 100%; max-width: none; }
-  .playground { grid-template-columns: 1fr; }
+  .playground { grid-template-columns: 1fr; height: auto; max-height: none; min-height: 0; }
   .editor-pane { border-right: 0; border-bottom: 1px solid var(--pg-border); }
-  .editor-host, .CodeMirror, .output { min-height: 420px; }
+  .editor-host, .CodeMirror, .output { height: min(560px, 60vh); max-height: 60vh; min-height: 0; }
 }
