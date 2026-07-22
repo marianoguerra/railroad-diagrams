@@ -1,0 +1,4 @@
+Wafer {
+    Main = number
+    number = digit+
+  }

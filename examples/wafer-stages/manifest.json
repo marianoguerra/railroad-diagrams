@@ -1,0 +1,776 @@
+[
+  {
+    "stage": "01-noplang",
+    "source": "chapter02/01-noplang.js",
+    "grammar": "NopLang",
+    "startRule": "Main",
+    "fullDiagram": "Main.full.svg",
+    "overview": "overview.html",
+    "atlasRules": [
+      "Main"
+    ],
+    "expansion": {
+      "preserveSharedRules": true,
+      "maxNodes": 1200
+    },
+    "rules": [
+      "Main"
+    ]
+  },
+  {
+    "stage": "02-numbers",
+    "source": "chapter02/02-numbers.js",
+    "grammar": "Wafer",
+    "startRule": "Main",
+    "fullDiagram": "Main.full.svg",
+    "overview": "overview.html",
+    "atlasRules": [
+      "Main"
+    ],
+    "expansion": {
+      "preserveSharedRules": true,
+      "maxNodes": 1200
+    },
+    "rules": [
+      "Main",
+      "number"
+    ]
+  },
+  {
+    "stage": "03-expression-stub",
+    "source": "chapter03/01-exprStub.js",
+    "grammar": "Wafer",
+    "startRule": "Main",
+    "fullDiagram": "Main.full.svg",
+    "overview": "overview.html",
+    "atlasRules": [
+      "Main"
+    ],
+    "expansion": {
+      "preserveSharedRules": true,
+      "maxNodes": 1200
+    },
+    "rules": [
+      "Main",
+      "Expr",
+      "number"
+    ]
+  },
+  {
+    "stage": "04-addition",
+    "source": "chapter03/02-waferAdd.js",
+    "grammar": "Wafer",
+    "startRule": "Main",
+    "fullDiagram": "Main.full.svg",
+    "overview": "overview.html",
+    "atlasRules": [
+      "Main",
+      "number"
+    ],
+    "expansion": {
+      "preserveSharedRules": true,
+      "maxNodes": 1200
+    },
+    "rules": [
+      "Main",
+      "Expr",
+      "number"
+    ]
+  },
+  {
+    "stage": "05-addition-subtraction",
+    "source": "chapter03/03-waferAddSub.js",
+    "grammar": "Wafer",
+    "startRule": "Main",
+    "fullDiagram": "Main.full.svg",
+    "overview": "overview.html",
+    "atlasRules": [
+      "Main",
+      "number"
+    ],
+    "expansion": {
+      "preserveSharedRules": true,
+      "maxNodes": 1200
+    },
+    "rules": [
+      "Main",
+      "Expr",
+      "op",
+      "number"
+    ]
+  },
+  {
+    "stage": "06-arithmetic",
+    "source": "chapter03.js",
+    "grammar": "Wafer",
+    "startRule": "Main",
+    "fullDiagram": "Main.full.svg",
+    "overview": "overview.html",
+    "atlasRules": [
+      "Main",
+      "Expr",
+      "PrimaryExpr"
+    ],
+    "expansion": {
+      "preserveSharedRules": true,
+      "maxNodes": 1200
+    },
+    "rules": [
+      "Main",
+      "Expr",
+      "PrimaryExpr",
+      "op",
+      "number"
+    ]
+  },
+  {
+    "stage": "07-identifiers",
+    "source": "chapter04/01-identifiers.js",
+    "grammar": "Wafer",
+    "startRule": "Main",
+    "fullDiagram": "Main.full.svg",
+    "overview": "overview.html",
+    "atlasRules": [
+      "Main",
+      "Expr",
+      "PrimaryExpr"
+    ],
+    "expansion": {
+      "preserveSharedRules": true,
+      "maxNodes": 1200
+    },
+    "rules": [
+      "Main",
+      "Expr",
+      "PrimaryExpr",
+      "op",
+      "number",
+      "identifier",
+      "identStart",
+      "identPart"
+    ]
+  },
+  {
+    "stage": "08-primary-expressions",
+    "source": "chapter04/02-primaryexpr.js",
+    "grammar": "Wafer",
+    "startRule": "Main",
+    "fullDiagram": "Main.full.svg",
+    "overview": "overview.html",
+    "atlasRules": [
+      "Main",
+      "identifier",
+      "Expr",
+      "identStart",
+      "PrimaryExpr"
+    ],
+    "expansion": {
+      "preserveSharedRules": true,
+      "maxNodes": 1200
+    },
+    "rules": [
+      "Main",
+      "Statement",
+      "LetStatement",
+      "Expr",
+      "PrimaryExpr",
+      "op",
+      "number",
+      "identifier",
+      "identStart",
+      "identPart"
+    ]
+  },
+  {
+    "stage": "09-locals",
+    "source": "chapter04/03-compileLocals.js",
+    "grammar": "Wafer",
+    "startRule": "Main",
+    "fullDiagram": "Main.full.svg",
+    "overview": "overview.html",
+    "atlasRules": [
+      "Main",
+      "identifier",
+      "Expr",
+      "identStart",
+      "PrimaryExpr"
+    ],
+    "expansion": {
+      "preserveSharedRules": true,
+      "maxNodes": 1200
+    },
+    "rules": [
+      "Main",
+      "Statement",
+      "LetStatement",
+      "Expr",
+      "PrimaryExpr",
+      "op",
+      "number",
+      "identifier",
+      "identStart",
+      "identPart"
+    ]
+  },
+  {
+    "stage": "10-assignment",
+    "source": "chapter04.js",
+    "grammar": "Wafer",
+    "startRule": "Main",
+    "fullDiagram": "Main.full.svg",
+    "overview": "overview.html",
+    "atlasRules": [
+      "Main",
+      "identifier",
+      "Expr",
+      "identStart",
+      "PrimaryExpr"
+    ],
+    "expansion": {
+      "preserveSharedRules": true,
+      "maxNodes": 1200
+    },
+    "rules": [
+      "Main",
+      "Statement",
+      "LetStatement",
+      "ExprStatement",
+      "Expr",
+      "AssignmentExpr",
+      "PrimaryExpr",
+      "op",
+      "number",
+      "identifier",
+      "identStart",
+      "identPart"
+    ]
+  },
+  {
+    "stage": "11-functions",
+    "source": "chapter05/04-functionDecl.js",
+    "grammar": "Wafer",
+    "startRule": "Module",
+    "fullDiagram": "Module.full.svg",
+    "overview": "overview.html",
+    "atlasRules": [
+      "Module",
+      "identifier",
+      "Expr",
+      "identStart",
+      "PrimaryExpr"
+    ],
+    "expansion": {
+      "preserveSharedRules": true,
+      "maxNodes": 1200
+    },
+    "rules": [
+      "Module",
+      "Statement",
+      "LetStatement",
+      "FunctionDecl",
+      "Params",
+      "BlockExpr",
+      "ExprStatement",
+      "Expr",
+      "AssignmentExpr",
+      "PrimaryExpr",
+      "op",
+      "number",
+      "identifier",
+      "identStart",
+      "identPart"
+    ]
+  },
+  {
+    "stage": "12-function-calls",
+    "source": "chapter05.js",
+    "grammar": "Wafer",
+    "startRule": "Module",
+    "fullDiagram": "Module.full.svg",
+    "overview": "overview.html",
+    "atlasRules": [
+      "Module",
+      "identifier",
+      "Expr",
+      "identStart",
+      "PrimaryExpr"
+    ],
+    "expansion": {
+      "preserveSharedRules": true,
+      "maxNodes": 1200
+    },
+    "rules": [
+      "Module",
+      "Statement",
+      "LetStatement",
+      "FunctionDecl",
+      "Params",
+      "BlockExpr",
+      "ExprStatement",
+      "Expr",
+      "AssignmentExpr",
+      "PrimaryExpr",
+      "CallExpr",
+      "Args",
+      "op",
+      "number",
+      "identifier",
+      "identStart",
+      "identPart"
+    ]
+  },
+  {
+    "stage": "13-if-expressions",
+    "source": "chapter06/01-ifExpr.js",
+    "grammar": "Wafer",
+    "startRule": "Module",
+    "fullDiagram": "Module.full.svg",
+    "overview": "overview.html",
+    "atlasRules": [
+      "Module",
+      "func",
+      "identifier",
+      "BlockExpr",
+      "identPart",
+      "if",
+      "else",
+      "let",
+      "identStart",
+      "Expr",
+      "PrimaryExpr",
+      "IfExpr"
+    ],
+    "expansion": {
+      "preserveSharedRules": true,
+      "maxNodes": 1200
+    },
+    "rules": [
+      "Module",
+      "Statement",
+      "LetStatement",
+      "FunctionDecl",
+      "Params",
+      "BlockExpr",
+      "ExprStatement",
+      "Expr",
+      "AssignmentExpr",
+      "PrimaryExpr",
+      "CallExpr",
+      "Args",
+      "IfExpr",
+      "op",
+      "number",
+      "keyword",
+      "if",
+      "else",
+      "func",
+      "let",
+      "identifier",
+      "identStart",
+      "identPart"
+    ]
+  },
+  {
+    "stage": "14-comparisons",
+    "source": "chapter06/03-test-comparison.js",
+    "grammar": "Wafer",
+    "startRule": "Module",
+    "fullDiagram": "Module.full.svg",
+    "overview": "overview.html",
+    "atlasRules": [
+      "Module",
+      "func",
+      "identifier",
+      "BlockExpr",
+      "identPart",
+      "if",
+      "else",
+      "let",
+      "and",
+      "or",
+      "identStart",
+      "Expr",
+      "PrimaryExpr",
+      "IfExpr"
+    ],
+    "expansion": {
+      "preserveSharedRules": true,
+      "maxNodes": 1200
+    },
+    "rules": [
+      "Module",
+      "Statement",
+      "LetStatement",
+      "FunctionDecl",
+      "Params",
+      "BlockExpr",
+      "ExprStatement",
+      "Expr",
+      "AssignmentExpr",
+      "PrimaryExpr",
+      "CallExpr",
+      "Args",
+      "IfExpr",
+      "binaryOp",
+      "compareOp",
+      "logicalOp",
+      "number",
+      "keyword",
+      "if",
+      "else",
+      "func",
+      "let",
+      "and",
+      "or",
+      "identifier",
+      "identStart",
+      "identPart"
+    ]
+  },
+  {
+    "stage": "15-while",
+    "source": "chapter06/04-test-while.js",
+    "grammar": "Wafer",
+    "startRule": "Module",
+    "fullDiagram": "Module.full.svg",
+    "overview": "overview.html",
+    "atlasRules": [
+      "Module",
+      "func",
+      "identifier",
+      "BlockExpr",
+      "identPart",
+      "if",
+      "else",
+      "let",
+      "and",
+      "or",
+      "while",
+      "identStart",
+      "Statement",
+      "Expr",
+      "PrimaryExpr",
+      "IfExpr"
+    ],
+    "expansion": {
+      "preserveSharedRules": true,
+      "maxNodes": 1200
+    },
+    "rules": [
+      "Module",
+      "Statement",
+      "LetStatement",
+      "WhileStatement",
+      "FunctionDecl",
+      "Params",
+      "BlockExpr",
+      "BlockStatements",
+      "ExprStatement",
+      "Expr",
+      "AssignmentExpr",
+      "PrimaryExpr",
+      "CallExpr",
+      "Args",
+      "IfExpr",
+      "binaryOp",
+      "compareOp",
+      "logicalOp",
+      "number",
+      "keyword",
+      "if",
+      "else",
+      "func",
+      "let",
+      "and",
+      "or",
+      "while",
+      "identifier",
+      "identStart",
+      "identPart"
+    ]
+  },
+  {
+    "stage": "16-statements",
+    "source": "chapter06.js",
+    "grammar": "Wafer",
+    "startRule": "Module",
+    "fullDiagram": "Module.full.svg",
+    "overview": "overview.html",
+    "atlasRules": [
+      "Module",
+      "func",
+      "identifier",
+      "BlockExpr",
+      "identPart",
+      "if",
+      "else",
+      "let",
+      "while",
+      "and",
+      "or",
+      "identStart",
+      "Statement",
+      "Expr",
+      "IfStatement",
+      "BlockStatements",
+      "PrimaryExpr",
+      "IfExpr"
+    ],
+    "expansion": {
+      "preserveSharedRules": true,
+      "maxNodes": 1200
+    },
+    "rules": [
+      "Module",
+      "Statement",
+      "LetStatement",
+      "IfStatement",
+      "WhileStatement",
+      "FunctionDecl",
+      "Params",
+      "BlockExpr",
+      "BlockStatements",
+      "ExprStatement",
+      "Expr",
+      "AssignmentExpr",
+      "PrimaryExpr",
+      "CallExpr",
+      "Args",
+      "IfExpr",
+      "binaryOp",
+      "compareOp",
+      "logicalOp",
+      "number",
+      "keyword",
+      "if",
+      "else",
+      "func",
+      "let",
+      "while",
+      "and",
+      "or",
+      "identifier",
+      "identStart",
+      "identPart"
+    ]
+  },
+  {
+    "stage": "17-extern-functions",
+    "source": "chapter07.js",
+    "grammar": "Wafer",
+    "startRule": "Module",
+    "fullDiagram": "Module.full.svg",
+    "overview": "overview.html",
+    "atlasRules": [
+      "Module",
+      "func",
+      "identifier",
+      "Params",
+      "BlockExpr",
+      "extern",
+      "identPart",
+      "if",
+      "else",
+      "let",
+      "while",
+      "and",
+      "or",
+      "identStart",
+      "Statement",
+      "Expr",
+      "IfStatement",
+      "BlockStatements",
+      "PrimaryExpr",
+      "IfExpr"
+    ],
+    "expansion": {
+      "preserveSharedRules": true,
+      "maxNodes": 1200
+    },
+    "rules": [
+      "Module",
+      "Statement",
+      "LetStatement",
+      "IfStatement",
+      "WhileStatement",
+      "FunctionDecl",
+      "ExternFunctionDecl",
+      "Params",
+      "BlockExpr",
+      "BlockStatements",
+      "ExprStatement",
+      "Expr",
+      "AssignmentExpr",
+      "PrimaryExpr",
+      "CallExpr",
+      "Args",
+      "IfExpr",
+      "binaryOp",
+      "compareOp",
+      "logicalOp",
+      "number",
+      "keyword",
+      "if",
+      "else",
+      "func",
+      "let",
+      "while",
+      "and",
+      "or",
+      "extern",
+      "identifier",
+      "identStart",
+      "identPart",
+      "space",
+      "singleLineComment",
+      "multiLineComment"
+    ]
+  },
+  {
+    "stage": "18-memory-and-arrays",
+    "source": "chapter09.js",
+    "grammar": "Wafer",
+    "startRule": "Module",
+    "fullDiagram": "Module.full.svg",
+    "overview": "overview.html",
+    "atlasRules": [
+      "Module",
+      "func",
+      "identifier",
+      "Params",
+      "BlockExpr",
+      "extern",
+      "identPart",
+      "if",
+      "else",
+      "let",
+      "while",
+      "and",
+      "or",
+      "identStart",
+      "Statement",
+      "Expr",
+      "IfStatement",
+      "BlockStatements",
+      "PrimaryExpr",
+      "IfExpr"
+    ],
+    "expansion": {
+      "preserveSharedRules": true,
+      "maxNodes": 1200
+    },
+    "rules": [
+      "Module",
+      "Statement",
+      "LetStatement",
+      "IfStatement",
+      "WhileStatement",
+      "FunctionDecl",
+      "ExternFunctionDecl",
+      "Params",
+      "BlockExpr",
+      "BlockStatements",
+      "ExprStatement",
+      "Expr",
+      "AssignmentExpr",
+      "PrimaryExpr",
+      "CallExpr",
+      "Args",
+      "IfExpr",
+      "binaryOp",
+      "compareOp",
+      "logicalOp",
+      "number",
+      "keyword",
+      "if",
+      "else",
+      "func",
+      "let",
+      "while",
+      "and",
+      "or",
+      "extern",
+      "identifier",
+      "identStart",
+      "identPart",
+      "space",
+      "singleLineComment",
+      "multiLineComment"
+    ]
+  },
+  {
+    "stage": "19-strings",
+    "source": "chapter10.js",
+    "grammar": "Wafer",
+    "startRule": "Module",
+    "fullDiagram": "Module.full.svg",
+    "overview": "overview.html",
+    "atlasRules": [
+      "Module",
+      "func",
+      "identifier",
+      "Params",
+      "BlockExpr",
+      "extern",
+      "identPart",
+      "if",
+      "else",
+      "let",
+      "while",
+      "and",
+      "or",
+      "identStart",
+      "Statement",
+      "Expr",
+      "IfStatement",
+      "BlockStatements",
+      "PrimaryExpr",
+      "quote",
+      "IfExpr"
+    ],
+    "expansion": {
+      "preserveSharedRules": true,
+      "maxNodes": 1200
+    },
+    "rules": [
+      "Module",
+      "Statement",
+      "LetStatement",
+      "IfStatement",
+      "WhileStatement",
+      "FunctionDecl",
+      "ExternFunctionDecl",
+      "Params",
+      "BlockExpr",
+      "BlockStatements",
+      "ExprStatement",
+      "Expr",
+      "AssignmentExpr",
+      "PrimaryExpr",
+      "CallExpr",
+      "Args",
+      "IfExpr",
+      "binaryOp",
+      "compareOp",
+      "logicalOp",
+      "number",
+      "keyword",
+      "if",
+      "else",
+      "func",
+      "let",
+      "while",
+      "and",
+      "or",
+      "extern",
+      "identifier",
+      "identStart",
+      "identPart",
+      "stringLiteral",
+      "quote",
+      "space",
+      "singleLineComment",
+      "multiLineComment"
+    ]
+  }
+]

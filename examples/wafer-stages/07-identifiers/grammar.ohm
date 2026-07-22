@@ -1,0 +1,20 @@
+Wafer {
+    Main = Expr
+    Expr = PrimaryExpr (op PrimaryExpr)*
+
+    PrimaryExpr = "(" Expr ")"  -- paren
+                | number
+
+    op = "+" | "-" | "*" | "/"
+    number = digit+
+
+    //+ "x", "élan", "_", "_99"
+    //- "1", "$nope"
+    identifier = identStart identPart*
+    identStart = letter | "_"
+    identPart = letter | "_" | digit
+
+    // Examples:
+    //+ "42", "1"
+    //- "abc"
+  }

@@ -1,0 +1,9 @@
+Wafer {
+    Main = Expr
+    Expr = number ("+" number)*
+    number = digit+
+
+    // Examples:
+    //+ "42", "1"
+    //- "abc"
+  }

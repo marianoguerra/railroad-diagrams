@@ -5,13 +5,28 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
-  "files": ["dist", "README.md", "LICENSE"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "npm run build && node --test test/*.test.js",
-    "example": "npm run build && node examples/json.js"
+    "example": "npm run build && node examples/json.js && node examples/wasmgroundup-noplang.js",
+    "wafer-diagrams": "npm run build && node examples/generate-wafer-stages.js"
   },
-  "devDependencies": { "typescript": "^6.0.0" },
-  "license": "MIT"
+  "devDependencies": {
+    "typescript": "^6.0.0"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "ohm-js": "^17.5.0"
+  }
 }

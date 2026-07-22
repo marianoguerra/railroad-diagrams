@@ -1,0 +1,51 @@
+Wafer {
+    Module = FunctionDecl*
+
+    Statement = LetStatement
+              | ExprStatement
+
+    //+ "let x = 3 + 4;", "let distance = 100 + 2;"
+    //- "let y;"
+    LetStatement = "let" identifier "=" Expr ";"
+
+    //+ "func zero() { 0 }", "func add(x, y) { x + y }"
+    //- "func x", "func x();"
+    FunctionDecl = "func" identifier "(" Params? ")" BlockExpr
+
+    Params = identifier ("," identifier)*
+
+    //+ "{ 42 }", "{ 66 + 99 }", "{ 1 + 2 - 3 }"
+    //+ "{ let x = 3; 42 }"
+    //- "{ 3abc }"
+    BlockExpr = "{" Statement* Expr "}"
+
+    ExprStatement = Expr ";"
+
+    Expr = AssignmentExpr  -- assignment
+          | PrimaryExpr (op PrimaryExpr)*  -- arithmetic
+
+    //+ "x := 3", "y := 2 + 1"
+    AssignmentExpr = identifier ":=" Expr
+
+    PrimaryExpr = "(" Expr ")"  -- paren
+                | number
+                | CallExpr
+                | identifier  -- var
+
+    CallExpr = identifier "(" Args? ")"
+
+    Args = Expr ("," Expr)*
+
+    op = "+" | "-" | "*" | "/"
+    number = digit+
+
+    //+ "x", "élan", "_", "_99"
+    //- "1", "$nope"
+    identifier = identStart identPart*
+    identStart = letter | "_"
+    identPart = identStart | digit
+
+    // Examples:
+    //+ "func addOne(x) { x + one }", "func one() { 1 } func two() { 2 }"
+    //- "42", "let x", "func x {}"
+  }
