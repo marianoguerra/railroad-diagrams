@@ -8,7 +8,7 @@ import {fileURLToPath, pathToFileURL} from "node:url";
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const workspace = mkdtempSync(join(tmpdir(), "railroad-diagrams-package-"));
 const cache = join(workspace, "npm-cache");
-const pack = JSON.parse(execFileSync("npm", ["pack", "--json", "--ignore-scripts", "--cache", cache], {
+const pack = JSON.parse(execFileSync("npm", ["pack", "--json", "--ignore-scripts", "--provenance=false", "--cache", cache], {
   cwd: root,
   encoding: "utf8",
 }))[0];
