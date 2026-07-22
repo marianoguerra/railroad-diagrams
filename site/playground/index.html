@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="Live JavaScript and Ohm grammar playground for railroad-diagrams">
+  <title>Playground · railroad-diagrams</title>
+  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="stylesheet" href="../assets/playground.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/addon/mode/simple.min.js"></script>
+  <script type="importmap">{"imports":{"ohm-js":"https://esm.sh/ohm-js@17.5.0"}}</script>
+</head>
+<body>
+  <nav><a href="../">railroad-diagrams</a> / <strong>playground</strong><a href="../examples/">Examples</a><a href="https://github.com/marianoguerra/railroad-diagrams">GitHub</a></nav>
+  <main class="playground-main">
+    <div class="playground-heading">
+      <div><p class="eyebrow">Live editor</p><h1>Build a diagram.</h1><p class="lede">Edit JavaScript or an Ohm grammar and see the SVG update live.</p></div>
+      <div class="mode-tabs" role="tablist" aria-label="Editor language">
+        <button class="mode-tab" type="button" role="tab" aria-selected="true" data-mode="javascript">JavaScript</button>
+        <button class="mode-tab" type="button" role="tab" aria-selected="false" data-mode="ohm">Ohm grammar</button>
+      </div>
+    </div>
+    <div class="playground">
+      <section class="editor-pane" aria-label="Source editor">
+        <div class="pane-header"><span id="source-label">JavaScript</span><small>Changes render automatically</small></div>
+        <div id="editor" class="editor-host"></div>
+      </section>
+      <section class="output-pane" aria-label="SVG output">
+        <div class="pane-header"><span>SVG output</span><small id="output-rule"></small></div>
+        <div id="output" class="output" aria-live="polite"><p class="output-placeholder">Rendering…</p></div>
+      </section>
+    </div>
+    <p class="playground-note">JavaScript runs locally in this page. Return either a diagram model or an SVG string.</p>
+  </main>
+  <script type="module" src="../assets/playground.js"></script>
+</body>
+</html>
