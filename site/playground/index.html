@@ -6,7 +6,7 @@
   <meta name="description" content="Live JavaScript and Ohm grammar playground for railroad-diagrams">
   <title>Playground · railroad-diagrams</title>
   <link rel="stylesheet" href="../assets/site.css">
-  <link rel="stylesheet" href="../assets/playground.css">
+  <link rel="stylesheet" href="../assets/playground.css?v=2">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.min.css">
   <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/javascript/javascript.min.js"></script>
@@ -25,7 +25,7 @@
     </div>
     <div class="playground">
       <section class="editor-pane" aria-label="Source editor">
-        <div class="pane-header"><span id="source-label">JavaScript</span><label class="example-picker">Example <select id="example-select" aria-label="Choose an example"></select></label></div>
+        <div class="pane-header"><span id="source-label">JavaScript</span><label class="example-picker">Example <select id="example-select" aria-label="Choose an example"><option value="sequence">Simple — conditional sequence</option><option value="json">Medium — JSON object</option><option value="wafer">Complex — Wafer function body</option></select></label></div>
         <div id="editor" class="editor-host"></div>
       </section>
       <section class="output-pane" aria-label="SVG output">
@@ -35,6 +35,6 @@
     </div>
     <p class="playground-note">JavaScript runs locally in this page. Return either a diagram model or an SVG string.</p>
   </main>
-  <script type="module" src="../assets/playground.js"></script>
+  <script type="module" src="../assets/playground.js?v=2"></script>
 </body>
 </html>
