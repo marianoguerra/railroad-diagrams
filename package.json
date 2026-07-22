@@ -12,7 +12,9 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "bin": {"railroad-diagrams": "./bin/railroad-diagrams.js"},
+  "bin": {
+    "railroad-diagrams": "bin/railroad-diagrams.js"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -49,10 +51,29 @@
     "typescript": "^6.0.0"
   },
   "license": "MIT",
-  "keywords": ["railroad", "syntax", "diagram", "grammar", "svg", "typescript", "ohm"],
-  "engines": { "node": ">=18" },
+  "keywords": [
+    "railroad",
+    "syntax",
+    "diagram",
+    "grammar",
+    "svg",
+    "typescript",
+    "ohm"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
   "sideEffects": false,
-  "peerDependencies": { "ohm-js": "^17.5.0" },
-  "peerDependenciesMeta": { "ohm-js": { "optional": true } },
-  "publishConfig": { "access": "public", "provenance": true }
+  "peerDependencies": {
+    "ohm-js": "^17.5.0"
+  },
+  "peerDependenciesMeta": {
+    "ohm-js": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
 }
