@@ -1,0 +1,17 @@
+{
+  "name": "railroad-diagrams",
+  "version": "0.1.0",
+  "description": "Width-aware SVG railroad diagrams based on librrd's three-pass layout algorithm",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "files": ["dist", "README.md", "LICENSE"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test test/*.test.js",
+    "example": "npm run build && node examples/json.js"
+  },
+  "devDependencies": { "typescript": "^6.0.0" },
+  "license": "MIT"
+}
