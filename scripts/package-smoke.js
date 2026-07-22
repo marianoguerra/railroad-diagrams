@@ -18,7 +18,7 @@ try {
   writeFileSync(join(workspace, "package.json"), JSON.stringify({type: "module", dependencies: {package: `file:${tarball}`}}));
   execFileSync("npm", ["install", "--ignore-scripts", "--cache", cache], {cwd: workspace, stdio: "pipe"});
   const installed = JSON.parse(readFileSync(join(workspace, "node_modules/package/package.json"), "utf8"));
-  assert.deepEqual(installed.files, ["dist", "README.md", "LICENSE", "CHANGELOG.md"]);
+  assert.deepEqual(installed.files, ["dist", "bin", "scripts/grammar-stages.js", "README.md", "LICENSE", "CHANGELOG.md"]);
   const core = await import(pathToFileURL(join(workspace, "node_modules/package/dist/index.js")));
   assert.equal(typeof core.renderSvg, "function");
   assert.equal("railroadGrammar" in core, false);

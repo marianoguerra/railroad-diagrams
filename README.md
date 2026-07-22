@@ -1,19 +1,17 @@
-# railroad-diagrams
+# @marianoguerra/railroad-diagrams
 
 A dependency-free core TypeScript implementation of the align → wrap → justify algorithm from [*Automatic layout of railroad diagrams*](https://arxiv.org/abs/2509.15834), informed by the authors' [librrd reference implementation](https://github.com/epfl-systemf/librrd), producing standalone SVG strings.
-
-> This package is preparing for its first public release. Its final npm name has not yet been selected.
 
 ## Installation
 
 The package is ESM-only and supports Node.js 18 or newer. It also works in modern browsers through an ESM-aware bundler.
 
 ```sh
-npm install <published-package-name>
+npm install @marianoguerra/railroad-diagrams
 ```
 
 ```ts
-import { sequence, terminal, nonterminal, zeroOrMore, renderSvg } from "railroad-diagrams";
+import { sequence, terminal, nonterminal, zeroOrMore, renderSvg } from "@marianoguerra/railroad-diagrams";
 
 const diagram = sequence(
   terminal("["),
@@ -67,7 +65,7 @@ npm install ohm-js
 ```
 
 ```ts
-import { renderOhmGrammar } from "<published-package-name>/ohm";
+import { renderOhmGrammar } from "@marianoguerra/railroad-diagrams/ohm";
 
 const diagrams = renderOhmGrammar(`
   NopLang {

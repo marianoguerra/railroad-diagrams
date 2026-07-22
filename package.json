@@ -1,8 +1,14 @@
 {
-  "name": "railroad-diagrams",
+  "name": "@marianoguerra/railroad-diagrams",
   "version": "0.1.0",
-  "private": true,
   "description": "Width-aware SVG railroad diagrams based on librrd's three-pass layout algorithm",
+  "author": "Mariano Guerra",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marianoguerra/railroad-diagrams.git"
+  },
+  "homepage": "https://marianoguerra.github.io/railroad-diagrams/",
+  "bugs": "https://github.com/marianoguerra/railroad-diagrams/issues",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
