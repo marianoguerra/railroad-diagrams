@@ -92,10 +92,26 @@ const output = document.querySelector("#output");
 const outputRule = document.querySelector("#output-rule");
 const sourceLabel = document.querySelector("#source-label");
 const exampleSelect = document.querySelector("#example-select");
+const themeToggle = document.querySelector("#theme-toggle");
 const tabs = [...document.querySelectorAll(".mode-tab")];
 let activeMode = "javascript";
 let renderTimer;
 let loadVersion = 0;
+
+function updateThemeToggle() {
+  const dark = document.documentElement.dataset.theme === "dark";
+  themeToggle.textContent = dark ? "Light mode" : "Dark mode";
+  themeToggle.setAttribute("aria-pressed", String(dark));
+}
+
+themeToggle.addEventListener("click", () => {
+  const theme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = theme;
+  localStorage.setItem("rrd-theme", theme);
+  updateThemeToggle();
+});
+
+updateThemeToggle();
 
 const editor = CodeMirror(document.querySelector("#editor"), {
   value: sourceCache.get("javascript:sequence"),
