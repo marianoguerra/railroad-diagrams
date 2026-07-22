@@ -10,6 +10,8 @@
 .editor-pane { border-right: 1px solid #d4cec1; background: #17232a; }
 .pane-header { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: .65rem 1rem; background: #f2eee5; border-bottom: 1px solid #d4cec1; font-weight: 750; }
 .pane-header small { font-weight: 500; color: #607079; }
+.example-picker { display: flex; align-items: center; gap: .5rem; color: #607079; font-size: .82rem; font-weight: 650; }
+.example-picker select { max-width: 230px; border: 1px solid #c9c2b4; border-radius: 6px; background: #fff; color: #263b44; font: inherit; padding: .35rem 1.8rem .35rem .5rem; }
 .editor-host { flex: 1; min-height: 580px; }
 .CodeMirror { height: 100%; min-height: 580px; font: 14px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: #17232a; color: #e8eee9; }
 .CodeMirror-gutters { background: #17232a; border-right: 1px solid #31434b; }
@@ -29,6 +31,8 @@
 @media (max-width: 850px) {
   .playground-heading { align-items: stretch; flex-direction: column; gap: .8rem; }
   .mode-tabs { align-self: flex-start; }
+  .pane-header { align-items: flex-start; flex-direction: column; }
+  .example-picker, .example-picker select { width: 100%; max-width: none; }
   .playground { grid-template-columns: 1fr; }
   .editor-pane { border-right: 0; border-bottom: 1px solid #d4cec1; }
   .editor-host, .CodeMirror, .output { min-height: 420px; }
