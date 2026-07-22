@@ -1,6 +1,7 @@
 {
   "name": "railroad-diagrams",
   "version": "0.1.0",
+  "private": true,
   "description": "Width-aware SVG railroad diagrams based on librrd's three-pass layout algorithm",
   "type": "module",
   "main": "dist/index.js",
@@ -8,25 +9,40 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./ohm": {
+      "types": "./dist/ohm.d.ts",
+      "import": "./dist/ohm.js",
+      "default": "./dist/ohm.js"
     }
   },
   "files": [
     "dist",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "CHANGELOG.md"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "clean": "tsc -b tsconfig.json --clean",
+    "build": "npm run clean && tsc -p tsconfig.json",
     "test": "npm run build && node --test test/*.test.js",
+    "package:smoke": "node scripts/package-smoke.js",
+    "release:check": "npm test && npm run package:smoke",
+    "prepack": "npm test",
     "example": "npm run build && node examples/json.js && node examples/wasmgroundup-noplang.js",
     "wafer-diagrams": "npm run build && node examples/generate-wafer-stages.js"
   },
   "devDependencies": {
+    "ohm-js": "^17.5.0",
     "typescript": "^6.0.0"
   },
   "license": "MIT",
-  "dependencies": {
-    "ohm-js": "^17.5.0"
-  }
+  "keywords": ["railroad", "syntax", "diagram", "grammar", "svg", "typescript", "ohm"],
+  "engines": { "node": ">=18" },
+  "sideEffects": false,
+  "peerDependencies": { "ohm-js": "^17.5.0" },
+  "peerDependenciesMeta": { "ohm-js": { "optional": true } },
+  "publishConfig": { "access": "public", "provenance": true }
 }

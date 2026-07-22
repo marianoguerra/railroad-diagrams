@@ -15,6 +15,10 @@ export interface LayoutOptions {
   continuationMarker?: string;
   flexAbsorb?: number;
   measureText?: (text: string, fontSize: number, fontFamily: string) => number;
+  /** Accessible name placed on the generated SVG. */
+  accessibleLabel?: string;
+  /** Longer accessible description placed in the generated SVG. */
+  accessibleDescription?: string;
 }
 
 export interface ResolvedOptions {
@@ -23,6 +27,7 @@ export interface ResolvedOptions {
   paddingX: number; paddingY: number; radius: number;
   continuationMarker: string; flexAbsorb: number;
   measureText: (text: string, fontSize: number, fontFamily: string) => number;
+  accessibleLabel: string; accessibleDescription: string;
 }
 
 export interface LayoutNode extends Metadata {
@@ -48,6 +53,7 @@ const defaults: ResolvedOptions = {
   gap: 20, rowGap: 24, fontSize: 15, fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
   paddingX: 10, paddingY: 7, radius: 10, continuationMarker: "", flexAbsorb: 0.1,
   measureText: (text, size) => [...text].reduce((n, c) => n + (/[^\x00-\xff]/.test(c) ? 1 : .61), 0) * size,
+  accessibleLabel: "Railroad diagram", accessibleDescription: "",
 };
 
 export function resolveOptions(options: LayoutOptions = {}): ResolvedOptions {
@@ -99,13 +105,31 @@ function rowBounds(items: Diagram[], o: ResolvedOptions): Widths {
 
 function choosePartition(items: Diagram[], width: number, depth: number, o: ResolvedOptions): Partition {
   const marker = o.continuationMarker ? o.measureText(o.continuationMarker, o.fontSize, o.fontFamily) + o.radius : 2 * o.radius;
-  const candidates = partitions(items).map(rows => {
+  const score = (rows: Partition) => {
     const bs = rows.map(r => rowBounds(r, o));
     const min = Math.max(...bs.map((b, i) => b.min + (rows.length > 1 ? (i === 0 || i === rows.length - 1 ? marker : 2 * marker) : 0)));
     const max = Math.max(...bs.map(b => b.max));
     const wrapPenalty = rows.length * 10 * 2 ** (2 * depth);
     return { rows, min, max, score: wrapPenalty + Math.max(0, max - width) ** 2 };
-  });
+  };
+  // Exact enumeration is useful for short rows but exponential. For long
+  // sequences, dynamic programming keeps one best prefix for each row count.
+  const candidates = items.length <= 12 ? partitions(items).map(score) : (() => {
+    const best: Array<Array<Partition | undefined>> = Array.from({ length: items.length + 1 }, () => []);
+    best[0]![0] = [];
+    for (let end = 1; end <= items.length; end++) {
+      for (let start = 0; start < end; start++) {
+        for (const prefix of best[start]!) {
+          if (!prefix) continue;
+          const candidate = [...prefix, items.slice(start, end)];
+          const rows = candidate.length;
+          const current = best[end]![rows];
+          if (!current || score(candidate).score < score(current).score) best[end]![rows] = candidate;
+        }
+      }
+    }
+    return best[items.length]!.filter((rows): rows is Partition => Boolean(rows)).map(score);
+  })();
   const fitting = candidates.filter(c => c.min <= width + .001);
   return (fitting.length ? fitting : candidates).sort((a, b) => a.score - b.score || a.max - b.max)[0]!.rows;
 }

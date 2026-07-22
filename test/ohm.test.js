@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {expandRailroadRule, railroadGrammar, renderOhmGrammar, renderOhmRuleFull} from "../dist/index.js";
+import {expandRailroadRule, railroadGrammar, renderOhmGrammar, renderOhmRuleFull} from "../dist/ohm.js";
 
 test("converts wasmgroundup's first Ohm grammar", () => {
   const source = `NopLang { Main = "" }`;

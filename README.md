@@ -1,6 +1,16 @@
 # railroad-diagrams
 
-A dependency-free TypeScript implementation of the align → wrap → justify algorithm from [*Automatic layout of railroad diagrams*](https://arxiv.org/abs/2509.15834), informed by the authors' [librrd reference implementation](https://github.com/epfl-systemf/librrd), producing standalone SVG strings.
+A dependency-free core TypeScript implementation of the align → wrap → justify algorithm from [*Automatic layout of railroad diagrams*](https://arxiv.org/abs/2509.15834), informed by the authors' [librrd reference implementation](https://github.com/epfl-systemf/librrd), producing standalone SVG strings.
+
+> This package is preparing for its first public release. Its final npm name has not yet been selected.
+
+## Installation
+
+The package is ESM-only and supports Node.js 18 or newer. It also works in modern browsers through an ESM-aware bundler.
+
+```sh
+npm install <published-package-name>
+```
 
 ```ts
 import { sequence, terminal, nonterminal, zeroOrMore, renderSvg } from "railroad-diagrams";
@@ -16,16 +26,35 @@ const svg = renderSvg(diagram, { width: 480 });
 
 The diagram language has terminals, nonterminals, n-ary sequences, positive stacks (`choice`, `alternatives`, `optional`) and reverse-flow negative stacks (`loop`, `oneOrMore`, `zeroOrMore`). `renderSvg` accepts a target `width`, `ltr`/`rtl` direction, vertical alignment and direction-aware justification policies, gaps, fonts, continuation markers, and a custom text measurement callback.
 
+### Core API
+
+| Export | Purpose |
+| --- | --- |
+| `terminal`, `nonterminal` | Create labeled stations |
+| `sequence` | Connect diagrams in order |
+| `choice`, `alternatives`, `optional` | Create forward-flow branches |
+| `loop`, `oneOrMore`, `zeroOrMore` | Create reverse-flow repetition branches |
+| `contentWidths`, `layout` | Measure and lay out diagrams without rendering |
+| `renderSvg` / `toSVG` | Return a standalone SVG string |
+
+Important rendering options include `width`, `direction`, `align`, `justify`, `gap`, `rowGap`, `fontSize`, `fontFamily`, `continuationMarker`, `measureText`, `accessibleLabel`, and `accessibleDescription`. Invalid numeric options throw `RangeError`.
+
+The generated SVG can be themed with `--rrd-stroke`, `--rrd-fill`, and `--rrd-terminal`. User-provided text and metadata are XML-escaped. For non-default fonts, supply `measureText` when accurate wrapping is important.
+
 Layout is also available independently with `layout`, and `contentWidths` exposes the min/max-content measurements used for wrapping. Narrow sequences enumerate their row partitions and prefer fewer, shallower wraps while minimizing max-content overflow, following the paper and librrd's local heuristic.
 
 Run `npm test` or `npm run example`.
 
 ## Ohm grammars
 
-The optional Ohm integration uses a semantics over Ohm's own grammar language to turn grammar rules into diagrams:
+The optional Ohm integration uses a semantics over Ohm's own grammar language to turn grammar rules into diagrams. Install its peer dependency and import the dedicated subpath:
+
+```sh
+npm install ohm-js
+```
 
 ```ts
-import { renderOhmGrammar } from "railroad-diagrams";
+import { renderOhmGrammar } from "<published-package-name>/ohm";
 
 const diagrams = renderOhmGrammar(`
   NopLang {
@@ -49,3 +78,9 @@ npm run wafer-diagrams -- /path/to/wasmgroundup-code
 ```
 
 Every stage includes an `overview.html` rule atlas. It places the selectively expanded start rule first, then renders every retained user-defined nonterminal below it once in breadth-first dependency order.
+
+## Development and releases
+
+Run `npm test` for the clean build and test suite, or `npm run release:check` to additionally build and install the exact npm tarball in a temporary project. See [CONTRIBUTING.md](CONTRIBUTING.md) and [RELEASING.md](RELEASING.md).
+
+This project is available under the [MIT License](LICENSE).

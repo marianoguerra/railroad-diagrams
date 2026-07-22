@@ -61,7 +61,10 @@ function renderNode(node: LayoutNode, o: ResolvedOptions, layer: RenderLayer): s
 export function renderSvg(diagram: Diagram, options: LayoutOptions = {}): string {
   const result = layout(diagram, options), {node, options:o}=result, margin=Math.max(8,o.radius), labelPad=node.label?o.fontSize+8:0;
   const width=node.width+2*margin, height=node.height+2*margin+labelPad;
-  return `<svg xmlns="http://www.w3.org/2000/svg" class="rrd-diagram" viewBox="0 0 ${n(width)} ${n(height)}" width="${n(width)}" height="${n(height)}" role="img">`+
+  const accessibleLabel = options.accessibleLabel ?? node.label ?? o.accessibleLabel;
+  const description = options.accessibleDescription ?? o.accessibleDescription;
+  return `<svg xmlns="http://www.w3.org/2000/svg" class="rrd-diagram" viewBox="0 0 ${n(width)} ${n(height)}" width="${n(width)}" height="${n(height)}" role="img" aria-label="${esc(accessibleLabel)}">`+
+    `<title>${esc(accessibleLabel)}</title>${description ? `<desc>${esc(description)}</desc>` : ""}`+
     `<style>.rrd-diagram{--rrd-stroke:#222;--rrd-fill:#fff;--rrd-terminal:#f7f7f7;color:var(--rrd-stroke);font-family:${esc(o.fontFamily)};font-size:${n(o.fontSize)}px}.rrd-rail{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.rrd-station rect{fill:var(--rrd-fill);stroke:currentColor;stroke-width:2}.rrd-terminal rect{fill:var(--rrd-terminal)}.rrd-station text{text-anchor:middle;dominant-baseline:central}.rrd-marker{text-anchor:middle;dominant-baseline:central}.rrd-label{font-size:.8em;dominant-baseline:auto}</style>`+
     `<g transform="translate(${margin} ${margin+labelPad})"><g class="rrd-rails">${renderNode(node,o,"rails")}</g><g class="rrd-content">${renderNode(node,o,"content")}</g></g></svg>`;
 }

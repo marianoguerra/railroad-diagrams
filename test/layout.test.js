@@ -57,3 +57,32 @@ test("justification adds rail instead of stretching station boxes", () => {
   assert.equal(station?.kind, "station");
   assert.ok(station.width < 150);
 });
+
+test("long sequences lay out without exponential partition enumeration", () => {
+  const diagram = sequence(...Array.from({length: 40}, (_, i) => terminal(String(i))));
+  const {node} = layout(diagram, {width: 240});
+  assert.equal(node.kind, "wrapped");
+  assert.match(renderSvg(diagram, {width: 240}), />39</);
+});
+
+test("SVG output has an accessible name and escaped description", () => {
+  const svg = renderSvg(terminal("value"), {
+    accessibleLabel: "Value <syntax>",
+    accessibleDescription: "Choose A & B",
+  });
+  assert.match(svg, /aria-label="Value &lt;syntax&gt;"/);
+  assert.match(svg, /<title>Value &lt;syntax&gt;<\/title>/);
+  assert.match(svg, /<desc>Choose A &amp; B<\/desc>/);
+});
+
+test("rejects invalid numeric layout options", () => {
+  assert.throws(() => layout(terminal("x"), {width: -1}), /width/);
+  assert.throws(() => layout(terminal("x"), {flexAbsorb: 2}), /flexAbsorb/);
+});
+
+test("renders Unicode text and RTL sequences", () => {
+  const diagram = sequence(terminal("λ"), nonterminal("値"));
+  const {node} = layout(diagram, {direction: "rtl"});
+  assert.equal(node.direction, "rtl");
+  assert.match(renderSvg(diagram, {direction: "rtl"}), /値[\s\S]*λ/);
+});
