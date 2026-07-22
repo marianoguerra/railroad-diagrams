@@ -37,7 +37,7 @@ The diagram language has terminals, nonterminals, n-ary sequences, positive stac
 
 Important rendering options include `width`, `direction`, `align`, `justify`, `gap`, `rowGap`, `fontSize`, `fontFamily`, `continuationMarker`, `measureText`, `accessibleLabel`, and `accessibleDescription`. Invalid numeric options throw `RangeError`.
 
-The generated SVG can be themed with `--rrd-stroke`, `--rrd-fill`, and `--rrd-terminal`. User-provided text and metadata are XML-escaped. For non-default fonts, supply `measureText` when accurate wrapping is important.
+The generated SVG can be themed with `--rrd-stroke`, `--rrd-text`, `--rrd-fill`, and `--rrd-terminal`. Text defaults to `--rrd-stroke` when `--rrd-text` is not set. User-provided text and metadata are XML-escaped. For non-default fonts, supply `measureText` when accurate wrapping is important.
 
 Layout is also available independently with `layout`, and `contentWidths` exposes the min/max-content measurements used for wrapping. Narrow sequences enumerate their row partitions and prefer fewer, shallower wraps while minimizing max-content overflow, following the paper and librrd's local heuristic.
 

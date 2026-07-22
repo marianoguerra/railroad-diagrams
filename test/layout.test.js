@@ -31,6 +31,13 @@ test("SVG output escapes content and metadata", () => {
   assert.match(svg, /class="rrd rrd-station rrd-terminal custom"/);
 });
 
+test("SVG text uses a themeable color variable", () => {
+  const svg = renderSvg(terminal("themed"));
+  assert.match(svg, /--rrd-text:var\(--rrd-stroke\)/);
+  assert.match(svg, /\.rrd-station text\{fill:var\(--rrd-text\)/);
+  assert.match(svg, /\.rrd-label\{fill:var\(--rrd-text\)/);
+});
+
 test("justification rails reach both row edges", () => {
   const svg = renderSvg(sequence(terminal("{"), terminal("}")), { width: 300 });
   assert.match(svg, /M0 14\.5H0/);
