@@ -1,5 +1,5 @@
 import {mkdir, writeFile} from "node:fs/promises";
-import {renderOhmGrammar} from "../dist/index.js";
+import {renderOhmGrammar} from "../dist/ohm.js";
 
 // The first Ohm grammar in wasmgroundup/code, chapter02/01-noplang.js.
 const grammarDef = `

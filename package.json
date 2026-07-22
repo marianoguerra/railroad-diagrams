@@ -6,6 +6,7 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "bin": {"railroad-diagrams": "./bin/railroad-diagrams.js"},
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -20,6 +21,8 @@
   },
   "files": [
     "dist",
+    "bin",
+    "scripts/grammar-stages.js",
     "README.md",
     "LICENSE",
     "CHANGELOG.md"
@@ -32,7 +35,8 @@
     "release:check": "npm test && npm run package:smoke",
     "prepack": "npm test",
     "example": "npm run build && node examples/json.js && node examples/wasmgroundup-noplang.js",
-    "wafer-diagrams": "npm run build && node examples/generate-wafer-stages.js"
+    "wafer-diagrams": "npm run build && node examples/generate-wafer-stages.js",
+    "build:site": "npm run build && npm run example && node scripts/build-site.js"
   },
   "devDependencies": {
     "ohm-js": "^17.5.0",

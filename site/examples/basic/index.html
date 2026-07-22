@@ -1,0 +1,12 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Basic example · railroad-diagrams</title><link rel="stylesheet" href="../../assets/site.css"></head><body><nav><a href="../../">railroad-diagrams</a> / <a href="../">examples</a> / basic</nav><main><h1>JSON object</h1><p>This diagram is composed directly from terminals, nonterminals, an optional branch, and a comma-separated repetition.</p><div class="preview"><img src="json-object.svg" alt="Railroad diagram for a JSON object"></div><pre><code>const value = alternatives(
+  terminal("null"), terminal("true"), terminal("false"),
+  nonterminal("number"), nonterminal("string"),
+);
+const member = sequence(nonterminal("string"), terminal(":"), value);
+const object = sequence(
+  terminal("{"),
+  optional(zeroOrMore(member, terminal(","))),
+  terminal("}"),
+);
+
+renderSvg(object, {width: 520});</code></pre></main></body></html>

@@ -45,6 +45,19 @@ Layout is also available independently with `layout`, and `contentWidths` expose
 
 Run `npm test` or `npm run example`.
 
+### CLI
+
+The package installs a `railroad-diagrams` command with SVG, JSON, and gallery subcommands:
+
+```sh
+railroad-diagrams svg grammar.ohm --rule Main --width 900 -o Main.svg
+railroad-diagrams svg grammar.ohm --rule Main --full -o Main.full.svg
+railroad-diagrams json grammar.ohm -o grammar.json
+railroad-diagrams stages grammars/01-start.ohm grammars/02-expressions.ohm -o grammar-stages
+```
+
+Omit `-o` from `svg` or `json` to write to standard output. The first rule is used when `--rule` is omitted. `stages` accepts any ordered list of Ohm grammar files and creates a self-contained HTML gallery; each filename becomes its stage name.
+
 ## Ohm grammars
 
 The optional Ohm integration uses a semantics over Ohm's own grammar language to turn grammar rules into diagrams. Install its peer dependency and import the dedicated subpath:
