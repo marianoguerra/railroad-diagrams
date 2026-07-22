@@ -8,7 +8,7 @@
   <script>document.documentElement.dataset.theme=localStorage.getItem("rrd-theme")|| (matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")</script>
   <link rel="stylesheet" href="../assets/site.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.min.css">
-  <link rel="stylesheet" href="../assets/playground.css?v=6">
+  <link rel="stylesheet" href="../assets/playground.css?v=7">
   <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/javascript/javascript.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/addon/mode/simple.min.js"></script>
@@ -30,12 +30,12 @@
         <div id="editor" class="editor-host"></div>
       </section>
       <section class="output-pane" aria-label="SVG output">
-        <div class="pane-header"><span>SVG output</span><small id="output-rule"></small></div>
+        <div class="pane-header output-header"><span id="output-title">SVG output</span><div id="output-tabs" class="output-tabs" role="tablist" aria-label="Ohm output" hidden><button type="button" role="tab" aria-selected="true" data-output="svg">SVG</button><button type="button" role="tab" aria-selected="false" data-output="atlas">Rule atlas</button></div><small id="output-rule"></small></div>
         <div id="output" class="output" aria-live="polite"><p class="output-placeholder">Rendering…</p></div>
       </section>
     </div>
     <p class="playground-note">JavaScript runs locally in this page. Return either a diagram model or an SVG string.</p>
   </main>
-  <script type="module" src="../assets/playground.js?v=3"></script>
+  <script type="module" src="../assets/playground.js?v=4"></script>
 </body>
 </html>

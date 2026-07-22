@@ -17,6 +17,11 @@ body, .lede, .playground-note, .output-placeholder { transition: background-colo
 .editor-pane { border-right: 1px solid var(--pg-border); background: var(--pg-editor); }
 .pane-header { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: .65rem 1rem; background: var(--pg-header); border-bottom: 1px solid var(--pg-border); font-weight: 750; }
 .pane-header small { font-weight: 500; color: var(--pg-muted); }
+.output-header { gap: .75rem; }
+.output-tabs { display: flex; gap: .25rem; margin-left: auto; padding: .2rem; border-radius: 6px; background: var(--pg-tabs); }
+.output-tabs[hidden] { display: none; }
+.output-tabs button { border: 0; border-radius: 4px; background: transparent; color: var(--pg-muted); font: inherit; font-size: .8rem; font-weight: 750; padding: .3rem .55rem; cursor: pointer; }
+.output-tabs button[aria-selected="true"] { background: var(--pg-panel); color: var(--accent); }
 .example-picker { display: flex; align-items: center; gap: .5rem; color: var(--pg-muted); font-size: .82rem; font-weight: 650; }
 .example-picker select { max-width: 230px; border: 1px solid var(--pg-border); border-radius: 6px; background: var(--pg-panel); color: var(--pg-text); font: inherit; padding: .35rem 1.8rem .35rem .5rem; }
 .editor-host { flex: 1; min-height: 0; overflow: hidden; }
@@ -38,6 +43,17 @@ body, .lede, .playground-note, .output-placeholder { transition: background-colo
 .output { position: relative; flex: 1; min-height: 0; display: block; padding: 2rem; overflow: auto; background-color: var(--pg-panel); background-image: linear-gradient(var(--pg-grid) 1px, transparent 1px), linear-gradient(90deg, var(--pg-grid) 1px, transparent 1px); background-size: 24px 24px; }
 .output svg { display: block; max-width: 100%; height: auto; margin: 0 auto; }
 .output .rrd-diagram { --rrd-stroke: var(--pg-text); --rrd-text: var(--pg-text); --rrd-fill: var(--pg-panel); --rrd-terminal: var(--pg-header); }
+.output.atlas-active { padding: 0; background-image: none; }
+.rule-atlas { display: grid; grid-template-columns: 150px minmax(0, 1fr); min-height: 100%; color: var(--pg-text); background: var(--pg-bg); }
+.rule-atlas aside { position: sticky; top: 0; align-self: start; max-height: 100%; padding: 1rem; overflow: auto; background: var(--pg-header); border-right: 1px solid var(--pg-border); }
+.rule-atlas ol { margin: .75rem 0 0; padding-left: 1.25rem; font-size: .8rem; line-height: 1.65; }
+.rule-atlas a { color: var(--pg-text); text-decoration-color: var(--pg-muted); }
+.atlas-rules { min-width: 0; padding: 1rem; }
+.atlas-rule { margin: 0 0 1.5rem; padding: 0 0 1.5rem; border: 0; border-bottom: 1px solid var(--pg-border); border-radius: 0; background: transparent; scroll-margin-top: 1rem; }
+.atlas-rule.start-rule { border-bottom-width: 3px; }
+.atlas-rule h3 { margin: 0 0 .6rem; font: 750 1rem ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.atlas-diagram { overflow: auto; border: 1px solid var(--pg-border); border-radius: 7px; background: var(--pg-panel); }
+.atlas-diagram svg { max-width: none; margin: 0; }
 .playground-error { align-self: stretch; margin: 0; color: #9c2915; background: #fff0ec; border: 1px solid #efb5a8; border-radius: 7px; padding: 1rem; white-space: pre-wrap; font: 13px/1.5 ui-monospace, SFMono-Regular, monospace; }
 .output-placeholder { text-align: center; }
 .playground-note { margin: .8rem 0 0; font-size: .9rem; }
@@ -46,8 +62,12 @@ body, .lede, .playground-note, .output-placeholder { transition: background-colo
   .playground-heading { align-items: stretch; flex-direction: column; gap: .8rem; }
   .mode-tabs { align-self: flex-start; }
   .pane-header { align-items: flex-start; flex-direction: column; }
+  .output-tabs { margin-left: 0; }
   .example-picker, .example-picker select { width: 100%; max-width: none; }
   .playground { grid-template-columns: 1fr; height: auto; max-height: none; min-height: 0; }
   .editor-pane { border-right: 0; border-bottom: 1px solid var(--pg-border); }
   .editor-host, .CodeMirror, .output { height: min(560px, 60vh); max-height: 60vh; min-height: 0; }
+  .rule-atlas { grid-template-columns: 1fr; }
+  .rule-atlas aside { position: static; border-right: 0; border-bottom: 1px solid var(--pg-border); }
+  .rule-atlas ol { columns: 2; }
 }
