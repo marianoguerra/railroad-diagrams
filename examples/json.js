@@ -5,4 +5,8 @@ const value = alternatives(terminal("null"), terminal("true"), terminal("false")
 const member = sequence(nonterminal("string"), terminal(":"), value);
 const object = sequence(terminal("{"), optional(zeroOrMore(member, terminal(","))), terminal("}"));
 await writeFile(new URL("json-object.svg", import.meta.url), renderSvg(object, { width: 520 }));
-console.log("Wrote examples/json-object.svg");
+await writeFile(new URL("../site/assets/json-object-wide.svg", import.meta.url), renderSvg(object, {
+  width: 960,
+  accessibleLabel: "Railroad diagram for a JSON object",
+}));
+console.log("Wrote JSON object examples");
