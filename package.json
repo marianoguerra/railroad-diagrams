@@ -44,7 +44,7 @@
     "prepack": "npm test",
     "example": "npm run build && node examples/json.js && node examples/wasmgroundup-noplang.js",
     "wafer-diagrams": "npm run build && node examples/generate-wafer-stages.js",
-    "build:site": "npm run build && npm run example && node scripts/build-site.js"
+    "build:site": "npm run build && node examples/json.js && node examples/wasmgroundup-noplang.js && node examples/generate-wafer-stages.js && node scripts/build-site.js"
   },
   "devDependencies": {
     "ohm-js": "^17.5.0",
