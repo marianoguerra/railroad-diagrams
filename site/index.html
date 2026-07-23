@@ -1,5 +1,81 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="description" content="Width-aware SVG railroad diagrams for JavaScript and TypeScript"><title>railroad-diagrams</title><link rel="stylesheet" href="assets/site.css"></head>
-<body><nav><strong>railroad-diagrams</strong><a href="playground/">Playground</a><a href="examples/">Examples</a><a href="https://github.com/marianoguerra/railroad-diagrams">GitHub</a></nav><main><header class="hero"><p class="eyebrow">Readable grammars at any width</p><h1>Railroad diagrams that know how to wrap.</h1><p class="lede">A TypeScript implementation of the align → wrap → justify algorithm from <a href="https://arxiv.org/abs/2509.15834"><em>Automatic layout of railroad diagrams</em></a>, based on its <a href="https://github.com/epfl-systemf/librrd">Scala reference implementation</a>. Build diagrams directly or turn an Ohm grammar into standalone, themeable SVG.</p><p><a class="button" href="playground/">Try the playground</a> <a class="button secondary" href="examples/">Explore examples</a> <a class="button secondary" href="https://github.com/marianoguerra/railroad-diagrams#readme">Read the documentation</a></p></header><section class="features"><article><h2>Width-aware</h2><p>Sequences wrap into readable rows while branches, loops, alignment, and direction remain intact.</p></article><article><h2>Small model</h2><p>Compose terminals, nonterminals, sequences, choices, and repetitions with a focused TypeScript API.</p></article><article><h2>Ohm and CLI</h2><p>Convert Ohm grammar files to SVG or JSON, or generate a complete browsable grammar atlas.</p></article></section><pre><code>railroad-diagrams svg grammar.ohm --rule Main --full -o Main.svg
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="Width-aware SVG railroad diagrams for JavaScript and TypeScript">
+  <title>railroad-diagrams</title>
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+  <nav><strong>railroad-diagrams</strong><a href="playground/">Playground</a><a href="examples/">Examples</a><a href="https://github.com/marianoguerra/railroad-diagrams">GitHub</a></nav>
+  <main>
+    <header class="hero">
+      <p class="eyebrow">Readable grammars at any width</p>
+      <h1>Railroad diagrams that know how to wrap.</h1>
+      <p class="lede">A TypeScript implementation of the align → wrap → justify algorithm from <a href="https://arxiv.org/abs/2509.15834"><em>Automatic layout of railroad diagrams</em></a>, based on its <a href="https://github.com/epfl-systemf/librrd">Scala reference implementation</a>. Build diagrams directly or turn an Ohm grammar into standalone, themeable SVG.</p>
+      <p><a class="button" href="playground/">Try the playground</a> <a class="button secondary" href="examples/">Explore examples</a> <a class="button secondary" href="https://github.com/marianoguerra/railroad-diagrams#readme">Read the documentation</a></p>
+    </header>
+
+    <section class="features">
+      <article><h2>Width-aware</h2><p>Sequences wrap into readable rows while branches, loops, alignment, and direction remain intact.</p></article>
+      <article><h2>Small model</h2><p>Compose terminals, nonterminals, sequences, choices, and repetitions with a focused TypeScript API.</p></article>
+      <article><h2>Ohm and CLI</h2><p>Convert Ohm grammar files to SVG or JSON, or generate a complete browsable grammar atlas.</p></article>
+    </section>
+
+    <section class="getting-started">
+      <p class="eyebrow">Get started</p>
+      <h2>Install it, or import it directly.</h2>
+      <div class="usage-grid">
+        <article>
+          <h3>npm</h3>
+          <p>Install the ESM-only package in a JavaScript or TypeScript project:</p>
+          <pre><code>npm install @marianoguerra/railroad-diagrams</code></pre>
+          <pre><code>import {
+  sequence, terminal, nonterminal,
+  zeroOrMore, renderSvg,
+} from "@marianoguerra/railroad-diagrams";
+
+const diagram = sequence(
+  terminal("["),
+  zeroOrMore(nonterminal("value"), terminal(",")),
+  terminal("]"),
+);
+
+document.querySelector("#diagram").innerHTML =
+  renderSvg(diagram, {width: 480});</code></pre>
+        </article>
+        <article>
+          <h3>Browser ESM</h3>
+          <p>No build step is required. Import the package from an ESM CDN in a module script:</p>
+          <pre><code>&lt;div id="diagram"&gt;&lt;/div&gt;
+&lt;script type="module"&gt;
+  import {
+    sequence, terminal, nonterminal, renderSvg,
+  } from "https://cdn.jsdelivr.net/npm/@marianoguerra/railroad-diagrams@0.1.3/+esm";
+
+  const diagram = sequence(
+    terminal("if"),
+    nonterminal("condition"),
+    terminal("then"),
+    nonterminal("result"),
+  );
+
+  document.querySelector("#diagram").innerHTML =
+    renderSvg(diagram, {width: 640});
+&lt;/script&gt;</code></pre>
+          <p class="note">The version is pinned so the example stays reproducible. Change <code>0.1.3</code> when upgrading.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="cli">
+      <h2>Command line</h2>
+      <pre><code>railroad-diagrams svg grammar.ohm --rule Main --full -o Main.svg
 railroad-diagrams json grammar.ohm -o grammar.json
-railroad-diagrams stages 01-basic.ohm 02-expressions.ohm -o stages</code></pre></main><footer>MIT licensed · SVG output has no runtime dependency</footer></body></html>
+railroad-diagrams stages 01-basic.ohm 02-expressions.ohm -o stages</code></pre>
+    </section>
+  </main>
+  <footer>MIT licensed · SVG output has no runtime dependency</footer>
+</body>
+</html>
