@@ -46,7 +46,17 @@ function renderNode(node: LayoutNode, o: ResolvedOptions, layer: RenderLayer): s
     const top=node.top!, bot=node.bottom!, x0=top.x, x1=x0+top.node.width, ey=node.entryY;
     const branch = (p: typeof top) => {
       const sy=p.y+p.node.entryY, ey2=p.y+p.node.exitY;
-      return rail(`M0 ${n(ey)}H${r}Q${x0} ${n(ey)} ${x0} ${n(sy)}M${x1} ${n(ey2)}Q${n(node.width-r)} ${n(ey2)} ${n(node.width-r)} ${n(ey)}H${n(node.width)}`);
+      const connector = (startX: number, startY: number, endX: number, endY: number) => {
+        const dy = endY - startY;
+        if (Math.abs(dy) < .001) return `M${n(startX)} ${n(startY)}H${n(endX)}`;
+        const bend = Math.min(r, Math.abs(dy) / 2, Math.abs(endX - startX) / 2);
+        const sx = Math.sign(endX - startX), sy = Math.sign(dy);
+        return `M${n(startX)} ${n(startY)}H${n(endX - sx * 2 * bend)}` +
+          `q${n(sx * bend)} 0 ${n(sx * bend)} ${n(sy * bend)}` +
+          `V${n(endY - sy * bend)}q0 ${n(sy * bend)} ${n(sx * bend)} ${n(sy * bend)}` +
+          `H${n(endX)}`;
+      };
+      return rail(connector(0, ey, x0, sy) + connector(x1, ey2, node.width, ey));
     };
     // Paint connectors first, so station fills mask collapsed/nested rails.
     body = (layer === "rails" ? branch(top) + branch(bot) : "") +

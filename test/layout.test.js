@@ -52,6 +52,12 @@ test("stack connectors are painted behind their children", () => {
   assert.ok(connector < station);
 });
 
+test("stack connectors use fixed-radius rounded bends", () => {
+  const svg = renderSvg(alternatives(terminal("a"), terminal("b")), { width: 240, radius: 10 });
+  assert.match(svg, /H10q10 0 10 10V57\.5q0 10 10 10H30/);
+  assert.doesNotMatch(svg, /Q30 /);
+});
+
 test("all rails are globally behind station content", () => {
   const svg = renderSvg(sequence(nonterminal("string"), terminal(":"), alternatives(terminal("null"), terminal("true"))));
   assert.ok(svg.indexOf('class="rrd-rails"') < svg.indexOf('class="rrd-content"'));
