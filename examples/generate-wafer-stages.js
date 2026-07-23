@@ -21,10 +21,16 @@ const waferSources = [
 const referenceRoot = resolve(process.argv[2] ?? "/tmp/wasmgroundup-code");
 const outputRoot = fileURLToPath(new URL("wafer-stages/", import.meta.url));
 const stages = await Promise.all(waferSources.map(async ([name, source]) => {
-  const javascript = await readFile(resolve(referenceRoot, source), "utf8");
-  const match = javascript.match(/const grammarDef = (?:String\.raw)?`([\s\S]*?)`;/);
-  if (!match) throw new Error(`No grammarDef template found in ${source}`);
-  return {name, source, grammarSource: match[1]};
+  try {
+    const javascript = await readFile(resolve(referenceRoot, source), "utf8");
+    const match = javascript.match(/const grammarDef = (?:String\.raw)?`([\s\S]*?)`;/);
+    if (!match) throw new Error(`No grammarDef template found in ${source}`);
+    return {name, source, grammarSource: match[1]};
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+    const grammarSource = await readFile(resolve(outputRoot, name, "grammar.ohm"), "utf8");
+    return {name, source, grammarSource};
+  }
 }));
 
 await generateGrammarStages(stages, outputRoot, {
