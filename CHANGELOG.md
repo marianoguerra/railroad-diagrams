@@ -4,6 +4,12 @@ All notable changes will be documented here, following [Keep a Changelog](https:
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-07-23
+
+### Fixed
+
+- Render stack branch connectors with symmetric, fixed-radius rounded bends.
+
 ## [0.1.1] - 2026-07-23
 
 ### Fixed
@@ -18,6 +24,7 @@ All notable changes will be documented here, following [Keep a Changelog](https:
 - Optional Ohm grammar conversion through the `/ohm` package subpath.
 - RTL layout, wrapping, justification, styling hooks, and accessible SVG metadata.
 
-[Unreleased]: https://github.com/marianoguerra/railroad-diagrams/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/marianoguerra/railroad-diagrams/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/marianoguerra/railroad-diagrams/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/marianoguerra/railroad-diagrams/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/marianoguerra/railroad-diagrams/releases/tag/v0.1.0
