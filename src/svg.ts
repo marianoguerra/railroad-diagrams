@@ -48,14 +48,22 @@ function renderNode(node: LayoutNode, o: ResolvedOptions, layer: RenderLayer): s
       const a=rows[i]!, b=rows[i+1]!, ay=a.y+a.node.exitY, by=b.y+b.node.entryY;
       const from = node.direction === "ltr" ? right : left;
       const to = node.direction === "ltr" ? left : right;
-      const turn = node.direction === "ltr" ? r : -r;
       if (o.continuationMarker && layer === "content") body += `<text class="rrd-marker" x="${from}" y="${n(ay)}">${esc(o.continuationMarker)}</text><text class="rrd-marker" x="${to}" y="${n(by)}">${esc(o.continuationMarker)}</text>`;
-      else if (!o.continuationMarker && layer === "rails") body += rail(`M${from} ${n(ay)}h${turn}q${turn} 0 ${turn} ${r}v${n(by-ay-2*r)}q0 ${r} ${n(-turn)} ${r}H${to}`);
+      else if (!o.continuationMarker && layer === "rails") {
+        const bend = Math.min(r, (by - ay) / 4);
+        const turn = node.direction === "ltr" ? bend : -bend;
+        const middle = (ay + by) / 2;
+        body += rail(`M${from} ${n(ay)}h${n(turn)}q${n(turn)} 0 ${n(turn)} ${n(bend)}` +
+          `V${n(middle-bend)}q0 ${n(bend)} ${n(-turn)} ${n(bend)}H${n(to-turn)}` +
+          `q${n(-turn)} 0 ${n(-turn)} ${n(bend)}V${n(by-bend)}` +
+          `q0 ${n(bend)} ${n(turn)} ${n(bend)}H${to}`);
+      }
     }
   } else if (node.kind === "stack") {
     const top=node.top!, bot=node.bottom!, x0=top.x, x1=x0+top.node.width, ey=node.entryY;
     const branch = (p: typeof top) => {
-      const sy=p.y+p.node.entryY, ey2=p.y+p.node.exitY;
+      const leftY=p.y+(p.node.direction === "ltr" ? p.node.entryY : p.node.exitY);
+      const rightY=p.y+(p.node.direction === "ltr" ? p.node.exitY : p.node.entryY);
       const connector = (startX: number, startY: number, endX: number, endY: number) => {
         const dy = endY - startY;
         if (Math.abs(dy) < .001) return `M${n(startX)} ${n(startY)}H${n(endX)}`;
@@ -66,7 +74,7 @@ function renderNode(node: LayoutNode, o: ResolvedOptions, layer: RenderLayer): s
           `V${n(endY - sy * bend)}q0 ${n(sy * bend)} ${n(sx * bend)} ${n(sy * bend)}` +
           `H${n(endX)}`;
       };
-      return rail(connector(0, ey, x0, sy) + connector(x1, ey2, node.width, ey));
+      return rail(connector(0, ey, x0, leftY) + connector(x1, rightY, node.width, ey));
     };
     // Paint connectors first, so station fills mask collapsed/nested rails.
     body = (layer === "rails" ? branch(top) + branch(bot) : "") +

@@ -21,7 +21,7 @@ test("RTL wrapped sequences connect their edges and rows in reverse", () => {
   const d = sequence(terminal("alpha"), terminal("beta"), terminal("gamma"), terminal("delta"));
   const svg = renderSvg(d, { width: 180, direction: "rtl" });
   assert.match(svg, /M160 14\.5H180M0 [\d.]+H20/);
-  assert.match(svg, /M20 14\.5h-10q-10 0 -10 10/);
+  assert.match(svg, /M20 14\.5h-10q-10 0 -10 10V31q0 10 10 10H170q10 0 10 10V57\.5q0 10 -10 10H160/);
 });
 
 test("positive and negative stacks render branches and reverse loop flow", () => {
@@ -65,6 +65,18 @@ test("stack connectors use fixed-radius rounded bends", () => {
   const svg = renderSvg(alternatives(terminal("a"), terminal("b")), { width: 240, radius: 10 });
   assert.match(svg, /H10q10 0 10 10V57\.5q0 10 10 10H30/);
   assert.doesNotMatch(svg, /Q30 /);
+});
+
+test("stack connectors meet the physical edges of wrapped RTL branches", () => {
+  const wrapped = sequence(terminal("one"), terminal("two"), terminal("three"), terminal("four"));
+  const {node} = layout(alternatives(wrapped, terminal("fallback")), {width: 240, direction: "rtl"});
+  const top = node.top;
+  assert.equal(top?.node.kind, "wrapped");
+  assert.equal(top?.node.direction, "rtl");
+  const leftY = top.y + top.node.exitY;
+  const rightY = top.y + top.node.entryY;
+  const svg = renderSvg(alternatives(wrapped, terminal("fallback")), {width: 240, direction: "rtl"});
+  assert.match(svg, new RegExp(`V${leftY - 10}q0 10 10 10H30M210 ${rightY}`));
 });
 
 test("all rails are globally behind station content", () => {
