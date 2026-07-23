@@ -17,10 +17,42 @@
       <p><a class="button" href="playground/">Try the playground</a> <a class="button secondary" href="examples/">Explore examples</a> <a class="button secondary" href="https://github.com/marianoguerra/railroad-diagrams#readme">Read the documentation</a></p>
     </header>
 
-    <figure class="hero-demo">
-      <img src="assets/json-object-wide.svg" alt="Railroad diagram showing the syntax of a JSON object">
-      <figcaption><span>Generated output</span> A wide JSON object diagram rendered as standalone SVG.</figcaption>
-    </figure>
+    <section class="hero-showcase">
+      <div class="showcase-heading"><div><p class="eyebrow">Turn this</p><h2>Describe the syntax your way.</h2></div><p>Build a model with the JavaScript DSL or convert an Ohm grammar.</p></div>
+      <div class="source-grid">
+        <article>
+          <h3>JavaScript DSL</h3>
+          <pre><code>const value = alternatives(
+  terminal("null"), terminal("true"),
+  terminal("false"),
+  nonterminal("number"), nonterminal("string"),
+);
+const member = sequence(
+  nonterminal("string"), terminal(":"), value,
+);
+
+return sequence(
+  terminal("{"),
+  optional(zeroOrMore(member, terminal(","))),
+  terminal("}"),
+);</code></pre>
+        </article>
+        <article>
+          <h3>Ohm grammar</h3>
+          <pre><code>JSON {
+  object = "{" (member ("," member)*)? "}"
+  member = string ":" value
+  value  = "null" | "true" | "false"
+         | number | string
+}</code></pre>
+        </article>
+      </div>
+      <p class="into-label"><span>Into this</span> standalone, responsive SVG</p>
+      <figure class="hero-demo">
+        <img src="assets/json-object-wide.svg" alt="Railroad diagram showing the syntax of a JSON object">
+        <figcaption><span>Generated output</span> A wide JSON object diagram rendered without wrapping.</figcaption>
+      </figure>
+    </section>
 
     <section class="features">
       <article><h2>Width-aware</h2><p>Sequences wrap into readable rows while branches, loops, alignment, and direction remain intact.</p></article>
