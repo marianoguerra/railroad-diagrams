@@ -4,6 +4,14 @@ All notable changes will be documented here, following [Keep a Changelog](https:
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-07-23
+
+### Fixed
+
+- Connect wrapped sequences cleanly at their entry, exit, and row continuations.
+- Route wrapped RTL branches through their correct physical endpoints.
+- Regenerate Wafer examples during Pages builds from the committed Ohm grammars.
+
 ## [0.1.2] - 2026-07-23
 
 ### Fixed
@@ -24,7 +32,8 @@ All notable changes will be documented here, following [Keep a Changelog](https:
 - Optional Ohm grammar conversion through the `/ohm` package subpath.
 - RTL layout, wrapping, justification, styling hooks, and accessible SVG metadata.
 
-[Unreleased]: https://github.com/marianoguerra/railroad-diagrams/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/marianoguerra/railroad-diagrams/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/marianoguerra/railroad-diagrams/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/marianoguerra/railroad-diagrams/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/marianoguerra/railroad-diagrams/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/marianoguerra/railroad-diagrams/releases/tag/v0.1.0
