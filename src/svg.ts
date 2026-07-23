@@ -37,10 +37,20 @@ function renderNode(node: LayoutNode, o: ResolvedOptions, layer: RenderLayer): s
   } else if (node.kind === "wrapped") {
     const rows = node.rows ?? [], left = 2*r, right = node.width - 2*r;
     body = rows.map(p => `<g transform="translate(${n(p.x)} ${n(p.y)})">${renderNode(p.node,o,layer)}</g>`).join("");
+    if (layer === "rails" && rows.length) {
+      const first = rows[0]!, last = rows.at(-1)!;
+      const entryY = first.y + first.node.entryY, exitY = last.y + last.node.exitY;
+      body += node.direction === "ltr"
+        ? rail(`M0 ${n(entryY)}H${left}M${right} ${n(exitY)}H${n(node.width)}`)
+        : rail(`M${right} ${n(entryY)}H${n(node.width)}M0 ${n(exitY)}H${left}`);
+    }
     for (let i=0;i<rows.length-1;i++) {
       const a=rows[i]!, b=rows[i+1]!, ay=a.y+a.node.exitY, by=b.y+b.node.entryY;
-      if (o.continuationMarker && layer === "content") body += `<text class="rrd-marker" x="${right}" y="${n(ay)}">${esc(o.continuationMarker)}</text><text class="rrd-marker" x="${left}" y="${n(by)}">${esc(o.continuationMarker)}</text>`;
-      else if (!o.continuationMarker && layer === "rails") body += rail(`M${right} ${n(ay)}h${r}q${r} 0 ${r} ${r}v${n(by-ay-2*r)}q0 ${r} -${r} ${r}H${left}`);
+      const from = node.direction === "ltr" ? right : left;
+      const to = node.direction === "ltr" ? left : right;
+      const turn = node.direction === "ltr" ? r : -r;
+      if (o.continuationMarker && layer === "content") body += `<text class="rrd-marker" x="${from}" y="${n(ay)}">${esc(o.continuationMarker)}</text><text class="rrd-marker" x="${to}" y="${n(by)}">${esc(o.continuationMarker)}</text>`;
+      else if (!o.continuationMarker && layer === "rails") body += rail(`M${from} ${n(ay)}h${turn}q${turn} 0 ${turn} ${r}v${n(by-ay-2*r)}q0 ${r} ${n(-turn)} ${r}H${to}`);
     }
   } else if (node.kind === "stack") {
     const top=node.top!, bot=node.bottom!, x0=top.x, x1=x0+top.node.width, ey=node.entryY;

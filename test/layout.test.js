@@ -12,7 +12,16 @@ test("narrow sequences wrap and retain every station", () => {
   const d = sequence(terminal("alpha"), terminal("beta"), terminal("gamma"), terminal("delta"));
   const { node } = layout(d, { width: 180 });
   assert.equal(node.kind, "wrapped");
-  assert.match(renderSvg(d, { width: 180 }), /alpha[\s\S]*delta/);
+  const svg = renderSvg(d, { width: 180 });
+  assert.match(svg, /alpha[\s\S]*delta/);
+  assert.match(svg, /M0 14\.5H20M160 [\d.]+H180/);
+});
+
+test("RTL wrapped sequences connect their edges and rows in reverse", () => {
+  const d = sequence(terminal("alpha"), terminal("beta"), terminal("gamma"), terminal("delta"));
+  const svg = renderSvg(d, { width: 180, direction: "rtl" });
+  assert.match(svg, /M160 14\.5H180M0 [\d.]+H20/);
+  assert.match(svg, /M20 14\.5h-10q-10 0 -10 10/);
 });
 
 test("positive and negative stacks render branches and reverse loop flow", () => {
